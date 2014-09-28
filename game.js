@@ -68,7 +68,7 @@
 			});
 		}
 
-		if (e.keyCode === keyboardHash[letter]) {
+                if (e.keyCode === keyboardHash[currentEnemy.text()[0]]) {
 			var currentText = currentEnemy.text().slice(1);
 			currentEnemy.text(currentText);
 
