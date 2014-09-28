@@ -1,8 +1,39 @@
 (function($, d) {
 	'use strict';
-	var dictionaryWords = d.split(/\s/).map(function(val) { return val.toLowerCase(); }),
-		wLength = dictionaryWords.length,
-		gameContainer = $('.game');
+	var keyboardHash = {
+		'a': 65,
+		'b': 66,
+		'c': 67,
+		'd': 68,
+		'e': 69,
+		'f': 70,
+		'g': 71,
+		'h': 72,
+		'i': 73,
+		'j': 74,
+		'k': 75,
+		'l': 76,
+		'm': 77,
+		'n': 78,
+		'o': 79,
+		'p': 80,
+		'q': 81,
+		'r': 82,
+		's': 83,
+		't': 84,
+		'u': 85,
+		'v': 86,
+		'w': 87,
+		'x': 88,
+		'y': 89,
+		'z': 90
+	},
+	dictionaryWords = d.split(/\s/).map(function(val) { return val.toLowerCase(); }),
+	words = [],
+	wLength = dictionaryWords.length,
+	gameContainer = $('.game'),
+	check = false,
+	currentEnemy;
 
 	function randomIntFromInterval(min, max) {
 	    return Math.floor(Math.random() * (max-min + 1) + min);
@@ -36,7 +67,6 @@
 		});
 	}
 
-	var words = [];
 	for (var i = 0, len = 5; i < len; i++) {
 		var idx, selectedWord;
 
@@ -49,9 +79,6 @@
 	}
 
 	create(words);
-
-	var check = false;
-	var currentEnemy;
 	window.addEventListener('keydown', function(e) {
 		var letter = Object.getKey(keyboardHash, e.keyCode);
 		if (!check) {
@@ -68,7 +95,7 @@
 			});
 		}
 
-                if (e.keyCode === keyboardHash[currentEnemy.text()[0]]) {
+        if (e.keyCode === keyboardHash[currentEnemy.text()[0]]) {
 			var currentText = currentEnemy.text().slice(1);
 			currentEnemy.text(currentText);
 
@@ -76,40 +103,11 @@
 				currentEnemy.hide();
 				check = false;
 			}
-
 		}
 
-		console.log(e.keyCode);
-		console.log('event: ', e);
+		// console.log(e.keyCode);
+		// console.log('event: ', e);
 	});
 
-	var keyboardHash = {
-		'a': 65,
-		'b': 66,
-		'c': 67,
-		'd': 68,
-		'e': 69,
-		'f': 70,
-		'g': 71,
-		'h': 72,
-		'i': 73,
-		'j': 74,
-		'k': 75,
-		'l': 76,
-		'm': 77,
-		'n': 78,
-		'o': 79,
-		'p': 80,
-		'q': 81,
-		'r': 82,
-		's': 83,
-		't': 84,
-		'u': 85,
-		'v': 86,
-		'w': 87,
-		'x': 88,
-		'y': 89,
-		'z': 90
-	};
 
 })(jQuery, dictionary);
