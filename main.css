@@ -1,0 +1,35 @@
+body {
+	margin:0;
+
+}
+.container {
+	height: 100vh;
+	background: #222326;
+	padding-top: 300px;
+}
+
+.game {
+	width: 400px;
+	height: 600px;
+	background: white;
+	margin: auto;
+}
+
+.enemy {
+	display: inline-block;
+	background: rgba(0, 0, 0, .6);
+	padding: 0 5px;
+	color: white;
+	text-align: center;
+	position: relative;
+	top: 0;
+	transition: top 5s linear;
+}
+
+.enemy.move {
+	top: 580px;
+}
+
+.selected {
+	border: 1px solid red;
+}
