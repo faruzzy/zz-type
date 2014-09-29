@@ -67,6 +67,18 @@
 			}
 		},
 		create: function(words) {
+			var self = this;
+			for (var i = 0, len = 5; i < len; i++) {
+				var idx, selectedWord;
+
+				do {
+					idx = randomIntFromInterval(0, self.wLength);
+					selectedWord = dictionaryWords[idx];
+				} while (words.some(function(val) { return val.startsWith(selectedWord[0]); }))
+
+				words.push(selectedWord);
+			}
+
 			words.forEach(function(value) {
 			var t = randomIntFromInterval(1000, 4000);
 			setTimeout(function(word) {
@@ -80,6 +92,6 @@
 				}, tt, element);
 			}, t, value);
 		});
-			
+
 		}
 	};
