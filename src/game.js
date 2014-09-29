@@ -1,6 +1,6 @@
 (function($, d) {
 	'use strict';
-	
+
 	var keyboardHash = {
 		'a': 65,
 		'b': 66,
@@ -32,6 +32,7 @@
 	dictionaryWords = d.split(/\s/).map(function(val) { return val.toLowerCase(); }),
 	words = [],
 	wLength = dictionaryWords.length,
+	//gameContainer = $('.game'),
 	gameContainer = $('.game'),
 	check = false,
 	currentEnemy;
@@ -58,11 +59,15 @@
 			setTimeout(function(word) {
 				var tt = randomIntFromInterval(1000, 3000);
 				var element = $('<div/>', {
-					class: 'enemy'
-				}).text(word).appendTo(gameContainer);
+					class: 'enemy',
+					text: word
+				});
+
+				gameContainer[0].appendChild(element);
 
 				setTimeout(function(el) {
-					$('.game').find(el).addClass('move');
+					var oldClassName = el.className;
+					el.className = oldClassName + ' move';
 				}, tt, element);
 			}, t, value);
 		});
@@ -82,33 +87,37 @@
 	create(words);
 	window.addEventListener('keydown', function(e) {
 		var letter = Object.getKey(keyboardHash, e.keyCode);
+		var eWidth;
 		if (!check) {
-			$('.enemy:contains(' + letter + ')').each(function() {
-				if($(this).text().startsWith(letter)) {
-					currentEnemy =  $(this).addClass('selected');
+			var enemies = $('.enemy');
+			enemies.forEach(function(element) {
+				if (element.textContent.startsWith(letter)) {
+					var oldClassName = element.className;
+					element.className = oldClassName + ' selected';
+					currentEnemy = element;
+					if (!eWidth) {
+						eWidth = currentEnemy.offsetWidth;
+					}
 
-					var t = currentEnemy.text().slice(1);
-					currentEnemy.text(t);
+					var t = currentEnemy.textContent.slice(1);
+					currentEnemy.textContent = t;
+					currentEnemy.offsetWidth = eWidth;
+
 					check = true;
-
 					return false;
 				}
 			});
 		}
 
-        if (e.keyCode === keyboardHash[currentEnemy.text()[0]]) {
-			var currentText = currentEnemy.text().slice(1);
-			currentEnemy.text(currentText);
+        if (e.keyCode === keyboardHash[currentEnemy.textContent.charAt(0)]) {
+			var currentText = currentEnemy.textContent.slice(1);
+			currentEnemy.textContent = currentText;
+			currentEnemy.offsetWidth = eWidth;
 
-			if (currentEnemy.text().length === 0) {
-				currentEnemy.hide();
+			if (currentEnemy.textContent.length === 0) {
+				currentEnemy.style.display = 'none';
 				check = false;
 			}
 		}
-
-		// console.log(e.keyCode);
-		// console.log('event: ', e);
 	});
-
-
-})(jQuery, dictionary);
+})((Zamunda || jQuery), dictionary);

@@ -1,32 +1,62 @@
-(function(window) {
-	var $$ = function(selector, attributes) {
-		var tagRegex = /<([a-z]+)\/?/,
-			className = attributes.class,
-			textContent = attributes.text;
+/*
+ *
+ * Todo:
+ * 1 - Add the ability to select DOM elements
+ * 2 - Figure out to chains functions (addClass, width, etc..)
+ */
+(function(window, undefined) {
+	var 
 
-		var matches = selector.match(tagRegex);
-		if ( matches && matches.length ) {
-			if ( !attributes ) {
-				return document.createElement(matches[1]);	
-			} else {
-				var el = document.createElement(matches[1]);
+	array_proto = [],
 
-				if ( className ) {
-					el.className = className;
-				} else if ( textContent ) {
-					el.textContent = textContent;
-				}
+	core_slice = array_proto.slice,
 
-				return el;
-			}
-		}
-
-		var elements = document.querySelectorAll(selector);
-		return elements.length === 1 ? elements.shift() : elements;
+	Zamunda = function(selector, attributes) {
+		return new Zamunda.fn.init(selector, attributes);
 	};
 
-	var el = $$('<div/>', {
-		class: 'test'
-	});
-})(window, undefined);
+	Zamunda.fn = Zamunda.prototype =  {
+		constructor: Zamunda,
+		init: function(selector, attributes) {
+			var tagRegex = /<(\w+)\/?/,
+				className,
+				textContent;
 
+			if (attributes) {
+				className = attributes.class;
+				textContent = attributes.text;
+			}
+
+			var matches = selector.match(tagRegex);
+
+			// DOM string
+			if (matches && matches.length) {
+				if (!attributes) {
+					return document.createElement(matches[1]);
+				} else {
+					var el = document.createElement(matches[1]);
+
+					if (className) {
+						el.className = className;
+					}
+
+					if (textContent) {
+						el.textContent = textContent;
+					}
+
+					return el;
+				}
+			} 
+
+			return core_slice.call(document.querySelectorAll(selector));
+		},
+
+		test: function() {
+			console.log('yay!');
+		}
+	};
+
+	Zamunda.fn.init.prototype = Zamunda.fn;
+
+	window.Zamunda = window.$ = Zamunda
+})(window);
