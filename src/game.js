@@ -120,4 +120,4 @@
 			}
 		}
 	});
-})((Zamunda || jQuery), dictionary);
+})((Zamunda, dictionary);
