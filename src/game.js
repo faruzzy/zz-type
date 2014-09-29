@@ -1,5 +1,6 @@
 (function($, d) {
 	'use strict';
+	
 	var keyboardHash = {
 		'a': 65,
 		'b': 66,
@@ -34,37 +35,6 @@
 	gameContainer = $('.game'),
 	check = false,
 	currentEnemy;
-
-	var $$ = function(selector, attributes) {
-		var tagRegex = /<([a-z]+)\/?/,
-			className = attributes.class,
-			textContent = attributes.text;
-
-		var matches = selector.match(tagRegex);
-		if ( matches && matches.length ) {
-			if ( !attributes ) {
-				return document.createElement(matches[1]);	
-			} else {
-				var el = document.createElement(matches[1]);
-
-				if ( className ) {
-					el.className = className;
-				} else if ( textContent ) {
-					el.textContent = textContent;
-				}
-
-				return el;
-			}
-		}
-
-		var elements = document.querySelectorAll(selector);
-		return elements.length === 1 ? elements.shift() : elements;
-	};
-
-	var el = $$('<div/>', {
-		class: 'test'
-	});
-
 
 	function randomIntFromInterval(min, max) {
 	    return Math.floor(Math.random() * (max-min + 1) + min);

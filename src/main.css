@@ -23,7 +23,7 @@ body {
 	text-align: center;
 	position: relative;
 	top: 0;
-	transition: top 5s linear;
+	transition: top 10s linear;
 }
 
 .enemy.move {
@@ -31,5 +31,5 @@ body {
 }
 
 .selected {
-	border: 1px solid red;
+	color: red;
 }
