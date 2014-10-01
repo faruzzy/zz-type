@@ -63,7 +63,7 @@
 					text: word
 				});
 
-				gameContainer[0].appendChild(element);
+				gameContainer[0][0].appendChild(element);
 
 				setTimeout(function(el) {
 					var oldClassName = el.className;
@@ -79,7 +79,7 @@
 		do {
 			idx = randomIntFromInterval(0, wLength);
 			selectedWord = dictionaryWords[idx];
-		} while (words.some(function(val) { return val.startsWith(selectedWord[0]); }))
+		} while (words.some(function(val) { return val.startsWith(selectedWord); }))
 
 		words.push(selectedWord);
 	}
@@ -90,7 +90,7 @@
 		var eWidth;
 		if (!check) {
 			var enemies = $('.enemy');
-			enemies.forEach(function(element) {
+			enemies[0].forEach(function(element) {
 				if (element.textContent.startsWith(letter)) {
 					var oldClassName = element.className;
 					element.className = oldClassName + ' selected';
@@ -120,4 +120,4 @@
 			}
 		}
 	});
-})((Zamunda, dictionary);
+})(Zamunda, dictionary);

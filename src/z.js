@@ -48,11 +48,29 @@
 				}
 			} 
 
-			return core_slice.call(document.querySelectorAll(selector));
+			var elements = core_slice.call(document.querySelectorAll(selector));
+
+			this[0] = elements;
+			//this.length = elements.length;
+
+			return this;
 		},
 
-		test: function() {
-			console.log('yay!');
+		addClass: function(value) {
+			var classes, i = 0, len = this.length;
+			if (typeof value === 'string' && value) {
+				var cur = this[0];
+
+				for(var i = 0; i < cur.length; i++) {
+					classes = value.split(/\s/);
+					var newClasses = value.split(/\s/);
+
+					for (var i in newClasses)
+						classes.push(newClasses[i]);
+
+						cur[i].className = classes.join(' ');
+				}
+			}
 		}
 	};
 
