@@ -2,7 +2,6 @@
  *
  * Todo:
  * 1 - Add the ability to select DOM elements
- * 2 - Figure out to chains functions (addClass, width, etc..)
  */
 (function(window, undefined) {
 	var 
