@@ -21,8 +21,11 @@
 				className,
 				textContent;
 
-			if (attributes) {
+			if (attributes && attributes.class) {
 				className = attributes.class;
+			}
+
+			if (attributes && attributes.text) {
 				textContent = attributes.text;
 			}
 
@@ -48,9 +51,7 @@
 			} 
 
 			var elements = core_slice.call(document.querySelectorAll(selector));
-
 			this[0] = elements;
-			//this.length = elements.length;
 
 			return this;
 		},
@@ -70,6 +71,13 @@
 						cur[i].className = classes.join(' ');
 				}
 			}
+		}, 
+
+		removeClass: function(value) {
+
+		}, 
+		each: function() {
+			
 		}
 	};
 
