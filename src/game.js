@@ -66,7 +66,7 @@
 			do {
 				idx = randomIntFromInterval(0, wLength);
 				selectedWord = dictionaryWords[idx];
-			} while (words.some(function(val) { return val.startsWith(selectedWord); }));
+			} while ( words.some(function(val) { return val.startsWith(selectedWord); }) );
 
 			words.push(selectedWord);
 		}

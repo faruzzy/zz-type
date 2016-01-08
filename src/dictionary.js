@@ -1,5 +1,19 @@
 'use strict';
+
 var dictionary = 
+'abashedness abashless abashlessly abashment abasia abasic abask Abassin abastardize abatable'+
+'beauseant beauship beauteous beauteously beauteousness beauti beautician beautied beautification beautifier'+
+'chromate chromatic chromatical chromatically chromatician chromaticism chromaticity chromatics chromatid chromatin'+
+'departmental departmentalism departmentalization departmentalize departmentally departmentization departmentize departure depas depascent'+
+'evasible evasion evasional evasive evasively evasiveness Eve eve Evea evechurr'+
+'fatigue fatigueless fatiguesome fatiguing fatiguingly fatiha fatil fatiloquent Fatima Fatimid'+
+'geoside geosphere Geospiza geostatic geostatics geostrategic geostrategist geostrategy geostrophic geosynclinal'+
+'hopefully hopefulness hopeite hopeless hopelessly hopelessness hoper Hopi hopi hopingly'+
+'irreverentially irreverently irreversibility irreversible irreversibleness irreversibly irrevertible irreviewable irrevisable irrevocability'+
+'Jesuitic Jesuitical Jesuitically Jesuitish Jesuitism Jesuitist Jesuitize Jesuitocracy Jesuitry Jesus';
+
+
+/*var dictionary = 
 //'a aa aal aalii aam Aani aardvark aardwolf Aaron Aaronic'+
 'Aaronical Aaronite Aaronitic Aaru Ab aba Ababdeh Ababua abac abaca'+
 'abacate abacay abacinate abacination abaciscus abacist aback abactinal abactinally abaction'+
@@ -27,8 +41,7 @@ var dictionary =
 'Kniphofia Knisteneaux knit knitback knitch knitted knitter knitting knittle knitwear'+
 'Irishize Irishly Irishman Irishness Irishry Irishwoman Irishy irisin irislike irisroot'+
 'taenifuge taeniiform Taeniobranchia taeniobranchiate Taeniodonta Taeniodontia Taeniodontidae Taenioglossa taenioglossate taenioid'+
-'taenifuge taeniiform Taeniobranchia taeniobranchiate Taeniodonta Taeniodontia Taeniodontidae Taenioglossa taenioglossate taenioid'+
-'zygomaticofrontal zygomaticomaxillary zygomaticoorbital zygomaticosphenoid zygomaticotemporal zygomaticum zygomaticus zygomaxillare zygomaxillary zygomorphic';
+'zygomaticofrontal zygomaticomaxillary zygomaticoorbital zygomaticosphenoid zygomaticotemporal zygomaticum zygomaticus zygomaxillare zygomaxillary zygomorphic';*/
 /*'abhor abhorrence abhorrency abhorrent abhorrently abhorrer abhorrible abhorring Abhorson abidal'+
 'abidance abide abider abidi abiding abidingly abidingness Abie Abies abietate'+
 'abietene abietic abietin Abietineae abietineous abietinic Abiezer Abigail abigail abigailship'+

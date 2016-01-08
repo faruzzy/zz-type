@@ -45,11 +45,11 @@
 					});
 				}
 
-		        if (e.keyCode === this.keyboardHash[currentEnemy.text()[0]]) {
+		        if ( e.keyCode === this.keyboardHash[currentEnemy.text()[0]] ) {
 					var currentText = currentEnemy.text().slice(1);
 					currentEnemy.text(currentText);
 
-					if (currentEnemy.text().length === 0) {
+					if ( currentEnemy.text().length === 0 ) {
 						currentEnemy.hide();
 						check = false;
 					}
