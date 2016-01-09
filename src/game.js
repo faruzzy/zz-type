@@ -17,6 +17,8 @@
 
 	words = [],
 
+	point = 0,
+
 	wLength = dictionaryWords.length,
 
 	gameContainer = document.querySelector('.game'),
@@ -92,6 +94,7 @@
 
 					var t = currentEnemy.textContent.slice(1);
 					currentEnemy.textContent = t;
+					point++;
 					//currentEnemy.offsetWidth = eWidth;
 
 					return false;
