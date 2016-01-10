@@ -5,6 +5,9 @@
 		return this[0] === char;
 	};
 
+	// we build a keyboard dictionary of all 
+	// the ascii characters with they corresponding
+	// keyCode values
 	var keyboardMap = (function() {
 		var map = {};
 		var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -31,6 +34,14 @@
 	    return Math.floor( Math.random() * (max-min + 1) + min );
 	}
 
+	/**
+	 * Returns the key corresponding to the value
+	 * of a dictionary
+	 * @method getKey
+	 * @param {Object} dictionary to look into
+	 * @param {Object} value we want the key of
+	 * @return {Object} key corresponding to the value
+	 */
 	Object.getKey = function( obj, value ) {
 		var keys = Object.keys( obj );
 		for ( var k in keys )
