@@ -1,13 +1,17 @@
 (function( d ) {
 	'use strict';
 
+	String.prototype.startsWith = function( char ) {
+		return this[0] === char;
+	};
+
 	var keyboardMap = (function() {
 		var map = {};
 		var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 		var start = 65;
 
 		for ( var i = 0; i < alphabet.length; i++ )
-			map[ alphabet[ i ] ] = start++;
+			map[alphabet[i]] = start++;
 		return map;
 	})(),
 
@@ -21,31 +25,23 @@
 
 	wLength = dictionaryWords.length,
 
-	gameContainer = document.querySelector('.game'),
-
-	check = false,
-
-	currentEnemy;
+	gameContainer = document.querySelector('.game');
 
 	function randomIntFromInterval( min, max ) {
 	    return Math.floor( Math.random() * (max-min + 1) + min );
 	}
 
-	String.prototype.startsWith = function( char ) {
-		return this[0] === char;
-	};
-
 	Object.getKey = function( obj, value ) {
 		var keys = Object.keys( obj );
-		for(var k in keys)
+		for ( var k in keys )
 			if ( obj[keys[k]] === value )
 				return keys[k];
 	};
 
 	function create( words ) {
-		words.forEach(function(value) {
+		words.forEach(function( value ) {
 			var t = randomIntFromInterval(1000, 4000);
-			setTimeout(function(word) {
+			setTimeout(function( word ) {
 				var tt = randomIntFromInterval(1000, 3000);
 				var element = document.createElement('div');
 				element.className = 'enemy';
@@ -62,13 +58,19 @@
 
 	// select words to send to the player
 	(function() {
+		function checkForDuplicate( str ) {
+			words.some(function( word ) {
+				return word === str;
+			});
+		}
+
 		for (var i = 0, len = 5; i < len; i++) {
 			var idx, selectedWord;
 
 			do {
 				idx = randomIntFromInterval(0, wLength);
 				selectedWord = dictionaryWords[idx];
-			} while ( words.some(function(val) { return val.startsWith(selectedWord); }) );
+			} while ( checkForDuplicate(selectedWord) );
 
 			words.push(selectedWord);
 		}
@@ -77,41 +79,45 @@
 
 	window.addEventListener('keydown', function( e ) {
 		var letter = Object.getKey(keyboardMap, e.keyCode);
-		var eWidth;
-		//if ( !check ) {
-			var enemies = document.querySelectorAll('.selected').length ? 
-						  document.querySelectorAll('.selected') : 
-						  document.querySelectorAll('.enemy');
+		var currentEnemy;
+		// TODO: check 'var eWidth = element.offsetWidth() ??
 
-			Array.prototype.forEach.call(enemies, function( element ) {
-				if (element.textContent.startsWith(letter)) {
-					var oldClassName = element.className;
-					element.className = oldClassName + ' selected';
-					currentEnemy = element;
-					if ( !eWidth ) {
-						eWidth = currentEnemy.offsetWidth;
-					}
+		function getVisibleEnemies() {
+			var enemiesArr = Array.from(document.querySelectorAll('.selected'));
+			var visibleEnemies = enemiesArr.filter(function( element ) {
+				if ( element.style.visibility !== 'hidden' ) 
+					return true;
+			});
+			return visibleEnemies;
+		}
 
-					var t = currentEnemy.textContent.slice(1);
-					currentEnemy.textContent = t;
-					point++;
-					//currentEnemy.offsetWidth = eWidth;
+		var enemies = getVisibleEnemies().length ? 
+					  getVisibleEnemies() : 
+					  document.querySelectorAll('.enemy');
 
-					return false;
+		Array.prototype.some.call(enemies, function( element ) {
+			currentEnemy = element;
+			if ( element.textContent.startsWith(letter) ) {
+				if ( currentEnemy.className.indexOf('selected') === -1 ) {
+					currentEnemy.className +=  ' selected';
+				}
+
+				var t = currentEnemy.textContent.slice(1);
+				currentEnemy.textContent = t;
+				point++;
+				return true;
+			}
+		});
+
+		if ( currentEnemy.textContent.length === 0 ) {
+			currentEnemy.style.visibility = 'hidden';
+			var nClassName = '';
+			currentEnemy.classList.forEach(function( className ) {
+				if ( className !== 'selected' ) {
+					nClassName += className + ' ';
 				}
 			});
-
-		//}
-
-        if ( e.keyCode === keyboardMap[currentEnemy.textContent.charAt(0)] ) {
-			var currentText = currentEnemy.textContent.slice(1);
-			currentEnemy.textContent = currentText;
-			currentEnemy.offsetWidth = eWidth;
-
-			if (currentEnemy.textContent.length === 0) {
-				currentEnemy.style.display = 'none';
-				check = false;
-			}
+			currentEnemy.className = nClassName.trim();
 		}
 	});
 })( dictionary );
