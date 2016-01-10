@@ -71,7 +71,7 @@
 						cur[i].className = classes.join(' ');
 				}
 			}
-		}, 
+		},
 
 		removeClass: function(value) {
 
@@ -83,5 +83,5 @@
 
 	Zamunda.fn.init.prototype = Zamunda.fn;
 
-	window.Zamunda = window.$ = Zamunda
+	window.Zamunda = window.$ = Zamunda;
 })(window);

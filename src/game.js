@@ -69,8 +69,13 @@
 
 	// select words to send to the player
 	(function() {
+		/**
+		 * Check if the string is already in the array
+		 * @param {String} to check for duplication
+		 * @return {Boolean} return true if the string is in the array
+		 */
 		function checkForDuplicate( str ) {
-			words.some(function( word ) {
+			return words.some(function( word ) {
 				return word === str;
 			});
 		}
@@ -110,7 +115,7 @@
 			currentEnemy = element;
 			if ( element.textContent.startsWith(letter) ) {
 				if ( currentEnemy.className.indexOf('selected') === -1 ) {
-					currentEnemy.className +=  ' selected';
+					currentEnemy.className += ' selected';
 				}
 
 				var t = currentEnemy.textContent.slice(1);
