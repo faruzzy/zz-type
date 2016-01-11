@@ -8,12 +8,12 @@
 	// we build a keyboard dictionary of all 
 	// the ascii characters with they corresponding
 	// keyCode values
-	var keyboardMap = (function() {
-		var map = {};
-		var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-		var start = 65;
+	let keyboardMap = (function() {
+		let map = {};
+		let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+		let start = 65;
 
-		for ( var i = 0; i < alphabet.length; i++ )
+		for ( let i = 0; i < alphabet.length; i++ )
 			map[alphabet[i]] = start++;
 		return map;
 	})(),
@@ -43,23 +43,27 @@
 	 * @return {Object} key corresponding to the value
 	 */
 	Object.getKey = function( obj, value ) {
-		var keys = Object.keys( obj );
-		for ( var k in keys )
+		let keys = Object.keys( obj );
+		for ( let k in keys )
 			if ( obj[keys[k]] === value )
 				return keys[k];
 	};
 
-	function create( words ) {
+	/**
+	 * Display words to be typed on the page
+	 * @param {Array} array of strings
+	 */
+	function displayEnemies( words ) {
 		words.forEach(function( value ) {
-			var s = 500;
-			var t = randomIntFromInterval(s, 4000);
-			setTimeout(function() {
+			let s = 500;
+			let t = randomIntFromInterval(s, 4000);
+			setTimeout( () => {
 				let element = document.createElement('div');
 				element.className = 'enemy';
 				element.textContent = value;
 
 				gameContainer.appendChild(element);
-				setTimeout(function() {
+				setTimeout( () => {
 					element.className += ' move';
 				}, s);
 			}, t);
@@ -79,8 +83,8 @@
 			});
 		}
 
-		for (var i = 0, len = 5; i < len; i++) {
-			var idx, selectedWord;
+		for ( let i = 0, len = 5; i < len; i++ ) {
+			let idx, selectedWord;
 
 			do {
 				idx = randomIntFromInterval(0, wLength);
@@ -89,24 +93,24 @@
 
 			words.push(selectedWord);
 		}
-		create(words);
+		displayEnemies(words);
 	})();
 
 	window.addEventListener('keydown', function( e ) {
-		var letter = Object.getKey(keyboardMap, e.keyCode);
-		var currentEnemy;
-		// TODO: check 'var eWidth = element.offsetWidth() ??
+		let letter = Object.getKey(keyboardMap, e.keyCode);
+		let currentEnemy;
+		// TODO: check 'let eWidth = element.offsetWidth() ??
 
 		function getVisibleEnemies() {
-			var enemiesArr = Array.from(document.querySelectorAll('.selected'));
-			var visibleEnemies = enemiesArr.filter(function( element ) {
+			let enemiesArr = Array.from(document.querySelectorAll('.selected'));
+			let visibleEnemies = enemiesArr.filter(function( element ) {
 				if ( element.style.visibility !== 'hidden' ) 
 					return true;
 			});
 			return visibleEnemies;
 		}
 
-		var enemies = getVisibleEnemies().length ? 
+		let enemies = getVisibleEnemies().length ? 
 					  getVisibleEnemies() : 
 					  document.querySelectorAll('.enemy');
 
@@ -117,7 +121,7 @@
 					currentEnemy.className += ' selected';
 				}
 
-				var t = currentEnemy.textContent.slice(1);
+				let t = currentEnemy.textContent.slice(1);
 				currentEnemy.textContent = t;
 				point++;
 				return true;
@@ -126,7 +130,7 @@
 
 		if ( currentEnemy.textContent.length === 0 ) {
 			currentEnemy.style.visibility = 'hidden';
-			var nClassName = '';
+			let nClassName = '';
 			currentEnemy.classList.forEach(function( className ) {
 				if ( className !== 'selected' ) {
 					nClassName += className + ' ';
