@@ -19,6 +19,7 @@ body {
 	display: inline-block;
 	background: rgba(0, 0, 0, .6);
 	padding: 0 5px;
+	margin: 0 5px;
 	color: white;
 	text-align: center;
 	position: relative;
@@ -31,5 +32,6 @@ body {
 }
 
 .selected {
-	color: red;
+	color: yellow;
+	border: 1px solid red;
 }
