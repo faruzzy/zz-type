@@ -1,4 +1,4 @@
-(function( d ) {
+( ( d ) => {
 	'use strict';
 
 	String.prototype.startsWith = function( char ) {
@@ -8,7 +8,7 @@
 	// we build a keyboard dictionary of all 
 	// the ascii characters with they corresponding
 	// keyCode values
-	let keyboardMap = (function() {
+	let keyboardMap = ( () => {
 		let map = {};
 		let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 		let start = 65;
@@ -54,7 +54,7 @@
 	 * @param {Array} array of strings
 	 */
 	function displayEnemies( words ) {
-		words.forEach(function( value ) {
+		words.forEach( ( value ) => {
 			let s = 500;
 			let t = randomIntFromInterval(s, 4000);
 			setTimeout( () => {
@@ -71,14 +71,14 @@
 	}
 	
 	// select words to send to the player
-	(function() {
+	( () => {
 		/**
 		 * Check if the string is already in the array
 		 * @param {String} to check for duplication
 		 * @return {Boolean} return true if the string is in the array
 		 */
 		function checkForDuplicate( str ) {
-			return words.some(function( word ) {
+			return words.some( ( word ) => {
 				return word === str;
 			});
 		}
@@ -96,14 +96,14 @@
 		displayEnemies(words);
 	})();
 
-	window.addEventListener('keydown', function( e ) {
+	window.addEventListener('keydown', ( e ) => {
 		let letter = Object.getKey(keyboardMap, e.keyCode);
 		let currentEnemy;
 		// TODO: check 'let eWidth = element.offsetWidth() ??
 
 		function getVisibleEnemies() {
 			let enemiesArr = Array.from(document.querySelectorAll('.selected'));
-			let visibleEnemies = enemiesArr.filter(function( element ) {
+			let visibleEnemies = enemiesArr.filter( ( element ) => {
 				if ( element.style.visibility !== 'hidden' ) 
 					return true;
 			});
@@ -114,7 +114,7 @@
 					  getVisibleEnemies() : 
 					  document.querySelectorAll('.enemy');
 
-		Array.prototype.some.call(enemies, function( element ) {
+		Array.prototype.some.call(enemies, ( element ) => {
 			currentEnemy = element;
 			if ( element.textContent.startsWith(letter) ) {
 				if ( currentEnemy.className.indexOf('selected') === -1 ) {
@@ -131,7 +131,7 @@
 		if ( currentEnemy.textContent.length === 0 ) {
 			currentEnemy.style.visibility = 'hidden';
 			let nClassName = '';
-			currentEnemy.classList.forEach(function( className ) {
+			currentEnemy.classList.forEach( ( className ) => {
 				if ( className !== 'selected' ) {
 					nClassName += className + ' ';
 				}
