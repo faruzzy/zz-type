@@ -1,4 +1,4 @@
-( ( d ) => {
+(function( d ) {
 	'use strict';
 
 	String.prototype.startsWith = function( char ) {
@@ -8,7 +8,7 @@
 	// we build a keyboard dictionary of all 
 	// the ascii characters with they corresponding
 	// keyCode values
-	let keyboardMap = ( () => {
+	let keyboardMap = (function() {
 		let map = {};
 		let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 		let start = 65;
@@ -64,14 +64,14 @@
 
 				gameContainer.appendChild(element);
 				setTimeout( () => {
-					element.className += ' move';
+					element.classList.add('move');
 				}, s);
 			}, t);
 		});
 	}
 	
 	// select words to send to the player
-	( () => {
+	(function() {
 		/**
 		 * Check if the string is already in the array
 		 * @param {String} to check for duplication
@@ -117,8 +117,8 @@
 		Array.prototype.some.call(enemies, ( element ) => {
 			currentEnemy = element;
 			if ( element.textContent.startsWith(letter) ) {
-				if ( currentEnemy.className.indexOf('selected') === -1 ) {
-					currentEnemy.className += ' selected';
+				if ( !currentEnemy.classList.contains('selected') ) {
+					currentEnemy.classList.add('selected');
 				}
 
 				let t = currentEnemy.textContent.slice(1);
@@ -130,13 +130,7 @@
 
 		if ( currentEnemy.textContent.length === 0 ) {
 			currentEnemy.style.visibility = 'hidden';
-			let nClassName = '';
-			currentEnemy.classList.forEach( ( className ) => {
-				if ( className !== 'selected' ) {
-					nClassName += className + ' ';
-				}
-			});
-			currentEnemy.className = nClassName.trim();
+			currentEnemy.classList.remove('selected');
 		}
 	});
 })( dictionary );
