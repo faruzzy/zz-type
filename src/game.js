@@ -51,22 +51,21 @@
 
 	function create( words ) {
 		words.forEach(function( value ) {
-			var t = randomIntFromInterval(1000, 4000);
-			setTimeout(function( word ) {
-				var tt = randomIntFromInterval(1000, 3000);
-				var element = document.createElement('div');
+			var s = 500;
+			var t = randomIntFromInterval(s, 4000);
+			setTimeout(function() {
+				let element = document.createElement('div');
 				element.className = 'enemy';
-				element.textContent = word;
+				element.textContent = value;
 
 				gameContainer.appendChild(element);
-				setTimeout(function(el) {
-					var oldClassName = el.className;
-					el.className = oldClassName + ' move';
-				}, tt, element);
-			}, t, value);
+				setTimeout(function() {
+					element.className += ' move';
+				}, s);
+			}, t);
 		});
 	}
-
+	
 	// select words to send to the player
 	(function() {
 		/**
