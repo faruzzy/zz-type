@@ -24,7 +24,7 @@ body {
 	text-align: center;
 	position: relative;
 	top: 0;
-	transition: top 10s linear;
+	transition: top 15s linear;
 }
 
 .enemy.move {
