@@ -8,6 +8,16 @@ body {
 	padding-top: 300px;
 }
 
+.container header {
+	width: 400px;
+	height: 80px;
+	color: white;
+	font-size: 12px;
+	margin: auto;
+	padding: auto;
+	text-align: center;
+}
+
 .game {
 	width: 400px;
 	height: 600px;
