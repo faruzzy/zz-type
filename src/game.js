@@ -1,14 +1,10 @@
 (function( d ) {
 	'use strict';
 
-	String.prototype.startsWith = function( char ) {
-		return this[0] === char;
-	};
-
 	// we build a keyboard dictionary of all 
 	// the ascii characters with they corresponding
 	// keyCode values
-	let keyboardMap = (function() {
+	const keyboardMap = (function() {
 		let map = {};
 		let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 		let start = 65;
@@ -16,13 +12,13 @@
 		for ( let i = 0; i < alphabet.length; i++ )
 			map[alphabet[i]] = start++;
 		return map;
-	})(),
+	})();
 
-	dictionaryWords = d.split(/\s/).map(function( val ) { 
+	const dictionaryWords = d.split(/\s/).map(function( val ) { 
 		return val.toLowerCase(); 
-	}),
+	});
 
-	words = [],
+	let words = [],
 
 	point = 0,
 
@@ -62,8 +58,8 @@
 	 * @return {Object} key corresponding to the value
 	 */
 	Object.getKey = function( obj, value ) {
-		let keys = Object.keys( obj );
-		for ( let k in keys )
+		const keys = Object.keys( obj );
+		for ( const k in keys )
 			if ( obj[keys[k]] === value )
 				return keys[k];
 	};
@@ -74,8 +70,8 @@
 	 */
 	function displayEnemies( words ) {
 		words.forEach( ( value ) => {
-			let s = 500;
-			let t = randomIntFromInterval(s, 4000);
+			const s = 500;
+			const t = randomIntFromInterval(s, 4000);
 			setTimeout( () => {
 				let element = document.createElement('div');
 				element.className = 'enemy';
@@ -116,7 +112,7 @@
 	})();
 
 	window.addEventListener('keydown', ( e ) => {
-		let letter = Object.getKey(keyboardMap, e.keyCode);
+		const letter = Object.getKey(keyboardMap, e.keyCode);
 		/**
 		 * Returns an array of all visible ememies,
 		 * that is which are not hidden since there's no point in looping over
@@ -136,7 +132,7 @@
 		// is such that no words is selected
 		if ( !inProgress )  {
 			inProgress = true;
-			let enemies = getVisibleEnemies().length ? 
+			const enemies = getVisibleEnemies().length ? 
 						  getVisibleEnemies() : 
 						  document.querySelectorAll('.enemy');
 
@@ -153,7 +149,7 @@
 		}
 
 		if ( currentEnemy.textContent.length > 0 ) {
-			let t = currentEnemy.textContent.slice(1);
+			const t = currentEnemy.textContent.slice(1);
 			currentEnemy.textContent = t;
 			currentEnemy.style.width = ceOffsetWidth;
 			point++;
