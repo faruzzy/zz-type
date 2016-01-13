@@ -28,6 +28,18 @@
 
 	wLength = dictionaryWords.length,
 
+	// is a word currently selected
+	inProgress = false,
+
+	/* The word that is currently selected */
+	currentEnemy,
+
+	/* The computed style of currentEnemy
+	 * that we get in order to not decrease its size 
+	 * has we shoot it
+	 */
+	ceOffsetWidth,
+
 	gameContainer = document.querySelector('.game');
 
 	function randomIntFromInterval( min, max ) {
@@ -98,9 +110,12 @@
 
 	window.addEventListener('keydown', ( e ) => {
 		let letter = Object.getKey(keyboardMap, e.keyCode);
-		let currentEnemy;
-		// TODO: check 'let eWidth = element.offsetWidth() ??
-
+		/**
+		 * Returns an array of all visible ememies,
+		 * that is which are not hidden since there's no point in looping over
+		 * those
+		 * @return {Array} of (words) node elements that are not hidden
+		 */
 		function getVisibleEnemies() {
 			let enemiesArr = Array.from(document.querySelectorAll('.selected'));
 			let visibleEnemies = enemiesArr.filter( ( element ) => {
@@ -110,27 +125,37 @@
 			return visibleEnemies;
 		}
 
-		let enemies = getVisibleEnemies().length ? 
-					  getVisibleEnemies() : 
-					  document.querySelectorAll('.enemy');
+		// if the current state of the game 
+		// is such that no words is selected
+		if ( !inProgress )  {
+			inProgress = true;
+			let enemies = getVisibleEnemies().length ? 
+						  getVisibleEnemies() : 
+						  document.querySelectorAll('.enemy');
 
-		Array.prototype.some.call(enemies, ( element ) => {
-			currentEnemy = element;
-			if ( element.textContent.startsWith(letter) ) {
-				if ( !currentEnemy.classList.contains('selected') ) {
-					currentEnemy.classList.add('selected');
+			Array.prototype.some.call(enemies, ( element ) => {
+				currentEnemy = element;
+				ceOffsetWidth = getComputedStyle(currentEnemy, null).getPropertyValue('width');
+				if ( element.textContent.startsWith(letter) ) {
+					if ( !currentEnemy.classList.contains('selected') ) {
+						currentEnemy.classList.add('selected');
+					}
+					return true;
 				}
+			});
+		}
 
-				let t = currentEnemy.textContent.slice(1);
-				currentEnemy.textContent = t;
-				point++;
-				return true;
+		if ( currentEnemy.textContent.length > 0 ) {
+			let t = currentEnemy.textContent.slice(1);
+			currentEnemy.textContent = t;
+			currentEnemy.style.width = ceOffsetWidth;
+			point++;
+			if ( currentEnemy.textContent.length === 0 ) {
+				currentEnemy.style.visibility = 'hidden';
+				currentEnemy.classList.remove('selected');
+				currentEnemy.style.width = '0px';
+				inProgress = false;
 			}
-		});
-
-		if ( currentEnemy.textContent.length === 0 ) {
-			currentEnemy.style.visibility = 'hidden';
-			currentEnemy.classList.remove('selected');
 		}
 	});
 })( dictionary );
