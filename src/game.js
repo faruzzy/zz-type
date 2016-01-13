@@ -42,6 +42,13 @@
 
 	gameContainer = document.querySelector('.game');
 
+	/**
+	 * Returns a random number that is in the range
+	 * between a minimum and maximum value (all inclusive)
+	 * @param {Integer} A minimum value
+	 * @param {Integer} A maximum value
+	 * @return {Integer} A value that falls in the range provided
+	 */
 	function randomIntFromInterval( min, max ) {
 	    return Math.floor( Math.random() * (max-min + 1) + min );
 	}
