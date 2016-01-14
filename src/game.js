@@ -14,9 +14,7 @@
 		return map;
 	})();
 
-	const dictionaryWords = d.split(/\s/).map(function( val ) { 
-		return val.toLowerCase(); 
-	});
+	const dictionaryWords = d.split(/\s/).map(x => x.toLowerCase());
 
 	let words = [],
 
@@ -24,7 +22,7 @@
 
 	wLength = dictionaryWords.length,
 
-	// is a word currently selected
+	// is a word currently selected ?
 	inProgress = false,
 
 	/* The word that is currently selected */
@@ -93,9 +91,7 @@
 		 * @return {Boolean} return true if the string is in the array
 		 */
 		function checkForDuplicate( str ) {
-			return words.some( ( word ) => {
-				return word === str;
-			});
+			return words.some( ( word ) => word === str );
 		}
 
 		for ( let i = 0, len = 5; i < len; i++ ) {
