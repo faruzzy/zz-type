@@ -8,7 +8,7 @@ def main():
     letters = ascii_lowercase
     xmap = {}
     char = ''
-    # could be /usr/dict/words on other flavor
+    # could be /usr/dict/words in other linux flavor
     path = '/usr/share/dict/words'
     with open(path) as f:
         lines = [ line.strip().lower() for line in f.readlines() ]
