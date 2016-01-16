@@ -35,8 +35,10 @@ def main():
             nmap[j] = wlist
 
     with open('output.txt', 'a') as f:
+        f.write('{\n')
         for key, array in nmap.items():
-            f.write('{}: {},\n'.format(key, array))
+            f.write('\t{}: {},\n'.format(key, array))
+        f.write('}')
 
 if __name__ == '__main__':
     main()
